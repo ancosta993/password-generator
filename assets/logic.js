@@ -43,13 +43,13 @@ var confirm_chosen_char = function(){
    if (special_char){
       character += characterObj.specialCharacter;
    }
-   if (character.length == 0){
+   // Make sure at least one criteria is chosen
+   if (character === "" || character === null){
       window.alert("You need to choose at least one criteria.");
-      confirm_chosen_char();
-   }else{
-      return character;
+      return confirm_chosen_char();
    }
 
+   return character;
 }
 
 // Validate at least one criteria is chosen
@@ -72,7 +72,6 @@ var password = function(character, required_length) {
    }
    return empty_pass;
 }
-
 var passwordGenerator = function(){
    var pass_len = get_pass_len();
    var characters = confirm_chosen_char();
@@ -80,6 +79,11 @@ var passwordGenerator = function(){
    return pass;
 }
 
-// console.log(passwordGenerator());
+var display = function(password){
+   var textLine = document.getElementById("generatedPassword");
+   textLine.textContent += password;
+}
+
+display(passwordGenerator());
 
 
