@@ -15,7 +15,7 @@ var get_pass_len = function(){
     // Validate password length and try again if need to.
     if (pass_length < 8 || pass_length > 128) {
        window.alert("Password can only be 8 to 128 characters long!")
-       get_pass_len();
+       return get_pass_len();
     }
     else{
        return pass_length
@@ -52,18 +52,14 @@ var confirm_chosen_char = function(){
    return character;
 }
 
-// Validate at least one criteria is chosen
 
-
-
-
-// Generate a random number
+// Generate a random number between 0 to max (argument)
 var randomNumber = function (max){
    var num = Math.floor(Math.random() * max);
    return num;
 }
 
-// Finalize the password
+// Randomly pick and concatanate the characters into a password
 var password = function(character, required_length) {
    var empty_pass = ""
    for (var i=0;i<required_length;i++){
@@ -72,18 +68,26 @@ var password = function(character, required_length) {
    }
    return empty_pass;
 }
+
+// Bring all the functions together and produce the final password
 var passwordGenerator = function(){
-   var pass_len = get_pass_len();
-   var characters = confirm_chosen_char();
-   var pass = password(characters, pass_len);
-   return pass;
+   var pass_len = get_pass_len();  // get the length of the password
+   var characters = confirm_chosen_char(); // find which characters to use
+   var pass = password(characters, pass_len); // randomly pick and concatanate the characters
+   return pass; // Return the password
 }
 
-var display = function(password){
-   var textLine = document.getElementById("generatedPassword");
-   textLine.textContent += password;
-}
+// Make a reference to the button (btn) div
+const btn = document.querySelector(".btn");
+// Make a reference to the div where password is displayed
+const display = document.querySelector("#password-display");
 
-display(passwordGenerator());
+// add a 'click' event listner and generatePassword() as the event handler for 'btn'
+btn.addEventListener('click', () => {
+   display.textContent = " ";
+   const password = passwordGenerator();
+   display.textContent = password;
+
+});
 
 
