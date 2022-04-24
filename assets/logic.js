@@ -84,7 +84,6 @@ const display = document.querySelector("#password-display");
 
 // add a 'click' event listner and generatePassword() as the event handler for 'btn'
 btn.addEventListener('click', () => {
-   display.textContent = " ";
    const password = passwordGenerator();
    display.textContent = password;
 
